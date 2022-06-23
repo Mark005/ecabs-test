@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: ecabs-booking-consumer
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:mydb
+    username: ${DB_USER:user}
+    password: ${DB_PASS:}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    default-schema: ${DEFAULT_SCHEMA:public}
+
+spring.h2.console.enabled: ${H2_CONSOLE_ENABLED:true}
+spring.h2.console.path: /h2
+
+rest:
+  api:
+    prefix: /api/v1
+
+rabbit:
+  message-exchange-name: MessageExchange
+  booking-exchange-name: BookingExchange
+
+  add-message-routing-key: add
+  edit-message-routing-key: edit
+  delete-message-routing-key: delete
+
+  message-audit-queue: MessageAuditQueue
+
+  add-queue: BookingAddQueue
+  edit-queue: BookingEditQueue
+  delete-queue: BookingDeleteQueue

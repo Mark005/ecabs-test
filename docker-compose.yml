@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+
+  ecabs-rabbit:
+    container_name: rabbit-assignment
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_VHOST: /

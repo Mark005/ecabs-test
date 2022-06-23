@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+producer:
+  async-queue-sender:
+    prefix: async/api/v1
+
+rabbit:
+  message-exchange-name: MessageExchange
+  booking-exchange-name: BookingExchange
+
+  add-message-routing-key: add
+  edit-message-routing-key: edit
+  delete-message-routing-key: delete
