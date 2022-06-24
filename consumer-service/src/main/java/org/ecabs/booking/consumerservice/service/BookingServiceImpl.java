@@ -51,14 +51,14 @@ public class BookingServiceImpl implements BookingService {
                     "Update error: \"Booking\" with id=%s}, not found".formatted(booking.getId().toString()));
         }
 
-        bookingRepository.save(booking);
+        Booking saved = bookingRepository.save(booking);
         if (booking.getTripWaypoints() != null) {
             booking.getTripWaypoints().forEach(waypoint -> {
                 waypoint.setBooking(booking);
                 waypointRepository.save(waypoint);
             });
         }
-        return bookingRepository.save(booking);
+        return saved;
 
     }
 
