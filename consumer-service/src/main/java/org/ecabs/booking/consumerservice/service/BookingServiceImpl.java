@@ -42,6 +42,21 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public Booking update(Booking booking) {
+        if (!bookingRepository.existsById(booking.getId())) {
+            throw new IllegalArgumentException(
+                    "Update error: \"Booking\" with id=%s}, not found".formatted(booking.getId().toString()));
+        }
+
+        if (booking.getTripWaypoints() != null) {
+            booking.getTripWaypoints().forEach(waypoint -> {
+                waypoint.setBooking(booking);
+            });
+        }
+        return bookingRepository.save(booking);
+    }
+
+    @Override
     public void delete(UUID uuid) {
         Booking booking = bookingRepository.findById(uuid)
                 .orElseThrow(() -> new NoSuchElementException("Booking with id=%s, not found".formatted(uuid)));
