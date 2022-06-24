@@ -13,7 +13,5 @@ public interface BookingService {
 
     Booking save(Booking booking);
 
-    Booking update(Booking booking);
-
     void delete(UUID uuid);
 }

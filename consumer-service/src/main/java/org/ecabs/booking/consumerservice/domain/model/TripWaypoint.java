@@ -33,8 +33,8 @@ public class TripWaypoint {
     private Double latitude;
     private Double longitude;
 
-    @ManyToOne
-    @JoinColumn(name = "booking_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 
 }

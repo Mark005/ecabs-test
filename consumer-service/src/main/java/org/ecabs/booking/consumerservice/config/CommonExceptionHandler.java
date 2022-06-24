@@ -1,5 +1,6 @@
 package org.ecabs.booking.consumerservice.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ecabs.booking.api.model.ResponseError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,11 +11,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @ControllerAdvice
 public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ResponseError> handleBadCredentialsException(NoSuchElementException e) {
+        log.error(e.getMessage(), e);
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(ResponseError.builder()
@@ -27,6 +30,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ResponseError> handleBadCredentialsException(IllegalArgumentException e) {
+        log.error(e.getMessage(), e);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ResponseError.builder()
@@ -39,6 +43,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<ResponseError> handleUncaughtExceptions(Exception e) {
+        log.error(e.getMessage(), e);
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ResponseError.builder()

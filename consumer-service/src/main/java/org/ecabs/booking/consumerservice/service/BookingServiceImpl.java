@@ -33,33 +33,12 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking save(Booking booking) {
-        Booking saved = bookingRepository.save(booking);
-
         if (booking.getTripWaypoints() != null) {
             booking.getTripWaypoints().forEach(waypoint -> {
                 waypoint.setBooking(booking);
-                waypointRepository.save(waypoint);
             });
         }
-        return saved;
-    }
-
-    @Override
-    public Booking update(Booking booking) {
-        if (!bookingRepository.existsById(booking.getId())) {
-            throw new IllegalArgumentException(
-                    "Update error: \"Booking\" with id=%s}, not found".formatted(booking.getId().toString()));
-        }
-
-        Booking saved = bookingRepository.save(booking);
-        if (booking.getTripWaypoints() != null) {
-            booking.getTripWaypoints().forEach(waypoint -> {
-                waypoint.setBooking(booking);
-                waypointRepository.save(waypoint);
-            });
-        }
-        return saved;
-
+        return bookingRepository.save(booking);
     }
 
     @Override

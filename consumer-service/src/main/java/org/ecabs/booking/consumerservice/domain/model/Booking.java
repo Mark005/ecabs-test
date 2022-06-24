@@ -45,9 +45,9 @@ public class Booking {
     private Instant createdOn;
     private Instant lastModifiedOn;
 
-    @OneToMany(cascade = CascadeType.REMOVE,
+    @OneToMany(mappedBy = "booking",
+            cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JoinColumn(name = "booking_id")
     private List<TripWaypoint> tripWaypoints = new ArrayList<>();
 
 }
