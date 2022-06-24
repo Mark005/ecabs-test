@@ -29,7 +29,7 @@ public class RabbitQueueListener {
 
     @RabbitListener(queues = "${rabbit.edit-queue}")
     public void receiveUpdate(BookingDto bookingDto) {
-        bookingService.update(mapper.mapFromDto(bookingDto));
+        bookingService.save(mapper.mapFromDto(bookingDto));
     }
 
     @RabbitListener(queues = "${rabbit.delete-queue}")
