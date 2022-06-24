@@ -33,7 +33,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking save(Booking booking) {
-        bookingRepository.save(booking);
+        Booking saved = bookingRepository.save(booking);
 
         if (booking.getTripWaypoints() != null) {
             booking.getTripWaypoints().forEach(waypoint -> {
@@ -41,7 +41,7 @@ public class BookingServiceImpl implements BookingService {
                 waypointRepository.save(waypoint);
             });
         }
-        return bookingRepository.save(booking);
+        return saved;
     }
 
     @Override
