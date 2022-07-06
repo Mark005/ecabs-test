@@ -24,18 +24,18 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<Void> addBooking(@RequestBody CreateBookingDto bookingDto) {
         rabbitSender.add(bookingDto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.accepted().build();
     }
 
     @PutMapping
     public ResponseEntity<Void> editBooking(@RequestBody BookingDto bookingDto) {
         rabbitSender.edit(bookingDto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.accepted().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
         rabbitSender.delete(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.accepted().build();
     }
 }
